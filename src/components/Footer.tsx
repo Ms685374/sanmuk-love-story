@@ -2,72 +2,68 @@ import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
-    <footer className="relative py-20 px-6 md:px-12 border-t border-border">
-      {/* Large text background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <footer className="relative py-24 md:py-32 px-6 md:px-12 border-t border-border">
+      {/* Large background text */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
         <motion.p
-          className="font-display text-[20vw] font-bold text-foreground/[0.02] whitespace-nowrap"
-          animate={{ x: [0, '-50%'] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          className="font-display text-[25vw] font-bold text-foreground/[0.02] whitespace-nowrap"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
         >
-          SANMUK · FOREVER · SANMUK · FOREVER · 
+          MS
         </motion.p>
       </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-          {/* Logo */}
+        {/* Main footer content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+          {/* Logo & tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="font-display text-4xl font-bold text-foreground mb-4">MS</h3>
+            <h3 className="font-display text-5xl font-bold text-foreground mb-4">MS</h3>
             <p className="font-display text-lg italic text-muted-foreground">
               SanMuk Forever
             </p>
-            <p className="font-body text-sm text-muted-foreground mt-4">
-              Mukesh + Sanjana = ❤️
-            </p>
           </motion.div>
 
-          {/* Quick facts */}
+          {/* Quick info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.6 }}
           >
-            <h4 className="font-body text-sm tracking-widest text-muted-foreground uppercase mb-6">
+            <h4 className="font-body text-[10px] tracking-[0.4em] text-muted-foreground uppercase mb-6">
               Quick Facts
             </h4>
-            <ul className="space-y-3">
-              <li className="font-body text-foreground/80">📅 Together since: Dec 2024</li>
-              <li className="font-body text-foreground/80">💕 Status: Hopelessly in love</li>
-              <li className="font-body text-foreground/80">🎯 Goal: Forever & beyond</li>
-              <li className="font-body text-foreground/80">😂 Jokes told: Countless (bad ones)</li>
+            <ul className="space-y-3 font-body text-sm text-foreground/70">
+              <li>Together since December 2024</li>
+              <li>Status: Hopelessly in love</li>
+              <li>Goal: Forever & beyond</li>
             </ul>
           </motion.div>
 
-          {/* Special message */}
+          {/* Special note */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h4 className="font-body text-sm tracking-widest text-muted-foreground uppercase mb-6">
+            <h4 className="font-body text-[10px] tracking-[0.4em] text-muted-foreground uppercase mb-6">
               A Note
             </h4>
-            <p className="font-body text-foreground/80 leading-relaxed">
+            <p className="font-body text-sm text-foreground/70 leading-relaxed mb-4">
               This website was made with all my love for you, Sanjana. 
-              You're my favorite notification, my best view, and my forever home. 
-              Here's to us! 🥂
+              You're my favorite notification and my forever home.
             </p>
-            <p className="font-body text-sm text-accent mt-4">
-              — Mukesh
-            </p>
+            <span className="font-body text-xs text-accent">— Mukesh</span>
           </motion.div>
         </div>
 
@@ -77,12 +73,12 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <p className="font-body text-sm text-muted-foreground">
-            Made with 💕 for New Year 2026
+          <p className="font-body text-xs tracking-[0.2em] text-muted-foreground uppercase">
+            Made with love for New Year 2026
           </p>
-          <p className="font-body text-sm text-muted-foreground">
+          <p className="font-body text-xs tracking-[0.2em] text-muted-foreground uppercase">
             © 2024-Forever · SanMuk
           </p>
         </motion.div>

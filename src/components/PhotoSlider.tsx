@@ -8,13 +8,13 @@ import coupleStars from '@/assets/couple-stars.jpg';
 import heroCouple from '@/assets/hero-couple-1.jpg';
 
 const photos = [
-  { id: 1, image: heroCouple, placeholder: 'Replace with your first memory together' },
-  { id: 2, image: coupleBeach, placeholder: 'Your favorite date' },
-  { id: 3, image: coupleLaugh, placeholder: 'A funny moment' },
-  { id: 4, image: coupleEmbrace, placeholder: 'A special occasion' },
-  { id: 5, image: coupleStars, placeholder: 'Just being together' },
-  { id: 6, image: heroCouple, placeholder: 'Adventure time' },
-  { id: 7, image: coupleBeach, placeholder: 'Cozy moments' },
+  { id: 1, image: heroCouple, caption: 'Where it all began' },
+  { id: 2, image: coupleBeach, caption: 'Our favorite escape' },
+  { id: 3, image: coupleLaugh, caption: 'Laughing at nothing' },
+  { id: 4, image: coupleEmbrace, caption: 'Just us' },
+  { id: 5, image: coupleStars, caption: 'Under the stars' },
+  { id: 6, image: heroCouple, caption: 'Every moment' },
+  { id: 7, image: coupleBeach, caption: 'Together forever' },
 ];
 
 const PhotoSlider = () => {
@@ -24,117 +24,141 @@ const PhotoSlider = () => {
     offset: ['start end', 'end start'],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-50%']);
+  const x = useTransform(scrollYProgress, [0, 1], ['10%', '-60%']);
 
   return (
-    <section ref={containerRef} className="relative py-20 overflow-hidden">
-      {/* Section label */}
-      <motion.div
-        className="px-6 md:px-12 mb-12"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="font-body text-xs tracking-[0.3em] text-muted-foreground uppercase">
-          (Framed)
-        </span>
-      </motion.div>
+    <section ref={containerRef} id="memories" className="relative py-24 md:py-40 overflow-hidden">
+      {/* Section header */}
+      <div className="px-6 md:px-12 mb-6">
+        <motion.span
+          className="font-body text-[10px] tracking-[0.4em] text-muted-foreground uppercase block mb-8"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          (Memories)
+        </motion.span>
 
-      {/* Stacked title */}
-      <div className="px-6 md:px-12 relative mb-8">
-        {[...Array(5)].map((_, i) => (
+        {/* Large stacked title */}
+        <div className="relative mb-4">
+          {[0, 1, 2].map((i) => (
+            <motion.h2
+              key={`ghost-${i}`}
+              className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-outline opacity-[0.06]"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 0.06, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.03, duration: 0.8 }}
+              style={{
+                position: 'absolute',
+                top: `${i * 4}px`,
+                left: 0,
+              }}
+            >
+              UNVEILED
+            </motion.h2>
+          ))}
           <motion.h2
-            key={i}
-            className={`font-display text-[10vw] md:text-[7vw] font-bold leading-none ${
-              i === 4 ? 'text-foreground' : 'text-outline opacity-15'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: i === 4 ? 1 : 0.15, y: 0 }}
+            className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-foreground relative"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.6 }}
-            style={{
-              position: i === 4 ? 'relative' : 'absolute',
-              top: i === 4 ? 'auto' : `${i * 5}px`,
-              left: 24,
-            }}
+            transition={{ delay: 0.1, duration: 0.8 }}
           >
             UNVEILED
           </motion.h2>
-        ))}
-      </div>
+        </div>
 
-      <div className="px-6 md:px-12 relative mb-16">
-        {[...Array(5)].map((_, i) => (
+        <div className="relative">
+          {[0, 1, 2].map((i) => (
+            <motion.h2
+              key={`ghost2-${i}`}
+              className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-outline-thin opacity-[0.04]"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 0.04, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 + i * 0.03, duration: 0.8 }}
+              style={{
+                position: 'absolute',
+                top: `${i * 4}px`,
+                left: 0,
+              }}
+            >
+              MOMENTS
+            </motion.h2>
+          ))}
           <motion.h2
-            key={i}
-            className={`font-display text-[10vw] md:text-[7vw] font-bold leading-none ${
-              i === 4 ? 'text-accent' : 'text-outline-thin opacity-10'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: i === 4 ? 1 : 0.1, y: 0 }}
+            className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-accent relative"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 + i * 0.05, duration: 0.6 }}
-            style={{
-              position: i === 4 ? 'relative' : 'absolute',
-              top: i === 4 ? 'auto' : `${i * 5}px`,
-              left: 24,
-            }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
             MOMENTS
           </motion.h2>
-        ))}
+        </div>
       </div>
 
       {/* Description */}
       <motion.p
-        className="px-6 md:px-12 font-display text-lg md:text-xl italic text-muted-foreground max-w-2xl mb-16"
+        className="px-6 md:px-12 font-display text-lg md:text-2xl italic text-muted-foreground max-w-xl mb-16"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.4, duration: 0.8 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
       >
-        SanMuk represents pure chaos wrapped in love. We champion laughter—through fights and makeups
+        Every photo tells a story of chaos, laughter, and pure love.
       </motion.p>
 
-      {/* Horizontal scrolling photos */}
+      {/* Horizontal scrolling photos with clip-path reveal */}
       <motion.div 
-        className="flex gap-6 px-6"
+        className="flex gap-4 md:gap-8 pl-6 md:pl-12"
         style={{ x }}
       >
         {photos.map((photo, index) => (
           <motion.div
             key={photo.id}
-            className="relative flex-shrink-0 w-[300px] md:w-[400px] h-[400px] md:h-[500px] bg-secondary rounded-lg overflow-hidden group"
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.6, type: 'spring' }}
-            whileHover={{ scale: 1.02, rotate: 1 }}
+            className="relative flex-shrink-0 w-[280px] md:w-[400px] lg:w-[500px] aspect-[3/4] overflow-hidden group"
+            initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
+            whileInView={{ opacity: 1, clipPath: 'inset(0% 0 0 0)' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ 
+              delay: index * 0.1, 
+              duration: 1,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
           >
-            {/* Image */}
+            {/* Image with scale on scroll */}
             <motion.img
               src={photo.image}
-              alt={photo.placeholder}
-              className="w-full h-full object-cover"
+              alt={photo.caption}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               initial={{ scale: 1.2 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.2 }}
+              transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             />
 
-            {/* Overlay on hover */}
+            {/* Caption overlay */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6"
+              className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/90 to-transparent"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
             >
-              <p className="font-body text-sm text-foreground">
-                {photo.placeholder}
-              </p>
+              <span className="font-body text-xs tracking-[0.2em] text-foreground/70 uppercase">
+                {photo.caption}
+              </span>
             </motion.div>
 
-            {/* Corner decorations */}
-            <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-foreground/20 group-hover:border-accent/50 transition-colors" />
-            <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-foreground/20 group-hover:border-accent/50 transition-colors" />
+            {/* Number indicator */}
+            <div className="absolute top-6 left-6">
+              <span className="font-body text-xs tracking-widest text-foreground/40">
+                /{String(index + 1).padStart(2, '0')}
+              </span>
+            </div>
           </motion.div>
         ))}
       </motion.div>

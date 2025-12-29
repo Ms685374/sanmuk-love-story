@@ -17,45 +17,34 @@ const Index = () => {
       className="min-h-screen bg-background text-foreground overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8 }}
     >
-      <Navbar />
+      {/* Film grain overlay */}
+      <div className="film-grain" />
       
+      <Navbar />
       <Hero />
       
       <MarqueeSection 
-        words={['SANMUK', 'SANMUK', 'SANMUK', 'SANMUK', 'SANMUK']} 
+        words={['SANMUK', 'FOREVER', 'SANMUK', 'FOREVER']} 
         direction="left"
-        speed={20}
-      />
-      
-      <MarqueeSection 
-        words={['FOREVER', 'FOREVER', 'FOREVER', 'FOREVER', 'FOREVER']} 
-        direction="right"
-        speed={25}
-        className="text-accent"
+        speed={35}
       />
       
       <StorySection />
-      
       <PhotoSlider />
       
       <MarqueeSection 
-        words={['LOVE', 'CHAOS', 'LAUGHTER', 'ADVENTURE', 'FOREVER']} 
-        direction="left"
-        speed={30}
+        words={['LOVE', 'CHAOS', 'LAUGHTER', 'FOREVER']} 
+        direction="right"
+        speed={40}
       />
       
       <ServicesSection />
-      
       <GallerySection />
-      
       <TimelineSection />
-      
       <QuotesSection />
-      
       <ForeverSection />
-      
       <Footer />
     </motion.div>
   );
