@@ -10,7 +10,7 @@ const ForeverSection = () => {
   });
 
   useEffect(() => {
-    const startDate = new Date('2024-12-29'); // Adjust to your actual proposal date
+    const startDate = new Date('2024-12-29T00:00:00');
 
     const updateTimer = () => {
       const now = new Date();
@@ -37,96 +37,67 @@ const ForeverSection = () => {
   ];
 
   return (
-    <section id="forever" className="relative py-32 px-6 md:px-12 overflow-hidden">
-      {/* Animated background */}
-      <motion.div
-        className="absolute inset-0"
+    <section id="forever" className="relative py-24 md:py-40 px-6 md:px-12 overflow-hidden">
+      {/* Subtle gradient */}
+      <div 
+        className="absolute inset-0 opacity-30"
         style={{
-          background: 'radial-gradient(ellipse at center, hsl(350 80% 60% / 0.1) 0%, transparent 70%)',
-        }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
+          background: 'radial-gradient(ellipse at center, hsl(350 75% 55% / 0.1) 0%, transparent 60%)',
         }}
       />
 
-      {/* Floating hearts */}
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-2xl"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -50, 0],
-            opacity: [0.2, 0.6, 0.2],
-            rotate: [0, 10, -10, 0],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 3,
-            repeat: Infinity,
-            delay: Math.random() * 3,
-          }}
-        >
-          💕
-        </motion.div>
-      ))}
-
-      <div className="relative max-w-6xl mx-auto text-center">
-        {/* Section label */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+      <div className="relative max-w-6xl mx-auto">
+        {/* Section header */}
+        <motion.span
+          className="font-body text-[10px] tracking-[0.4em] text-muted-foreground uppercase block mb-12 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="font-body text-xs tracking-[0.3em] text-muted-foreground uppercase">
-            (Time Together)
-          </span>
-        </motion.div>
+          (Time Together)
+        </motion.span>
 
         {/* Large title */}
-        <motion.h2
-          className="font-display text-[12vw] md:text-[10vw] font-bold text-foreground leading-none mb-12"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          FOREVER
-          <br />
-          <span className="text-accent italic">& Counting</span>
-        </motion.h2>
+        <div className="text-center mb-16">
+          <motion.h2
+            className="font-display text-[16vw] md:text-[12vw] font-bold text-foreground leading-[0.85]"
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            FOREVER
+          </motion.h2>
+          <motion.p
+            className="font-display text-[8vw] md:text-[6vw] italic text-accent mt-2"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 1 }}
+          >
+            & Counting
+          </motion.p>
+        </div>
 
-        {/* Timer */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 max-w-4xl mx-auto mb-20">
+        {/* Timer - minimal style */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto mb-20">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="relative p-6 md:p-8 bg-card rounded-lg border border-border"
+              className="text-center py-8 border-t border-border"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ scale: 1.05, borderColor: 'hsl(var(--accent))' }}
             >
               <motion.span
-                className="font-display text-4xl md:text-6xl font-bold text-foreground block"
+                className="font-display text-5xl md:text-7xl font-bold text-foreground block"
                 key={stat.value}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
               >
-                {stat.value}
+                {String(stat.value).padStart(2, '0')}
               </motion.span>
-              <span className="font-body text-xs tracking-widest text-muted-foreground uppercase mt-2 block">
+              <span className="font-body text-[10px] tracking-[0.3em] text-muted-foreground uppercase mt-4 block">
                 {stat.label}
               </span>
             </motion.div>
@@ -135,18 +106,19 @@ const ForeverSection = () => {
 
         {/* Message */}
         <motion.div
-          className="max-w-2xl mx-auto"
+          className="max-w-2xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
         >
           <p className="font-display text-xl md:text-2xl italic text-foreground/90 leading-relaxed mb-8">
             Every second with you is a second I'd choose again. Here's to 1 year down, 
-            and a lifetime of annoying each other to go! 🎉
+            and a lifetime of annoying each other to go!
           </p>
-          <p className="font-body text-muted-foreground">
-            Happy 1st Anniversary, Sanjana! From your forever partner-in-crime, Mukesh 💕
+          <p className="font-body text-sm text-muted-foreground">
+            Happy 1st Anniversary, Sanjana! 
+            <span className="text-accent ml-2">— Mukesh</span>
           </p>
         </motion.div>
       </div>

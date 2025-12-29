@@ -2,153 +2,153 @@ import { motion } from 'framer-motion';
 
 const timelineEvents = [
   {
+    number: '/01',
     date: 'December 2024',
     title: 'The Beginning',
-    description: 'Two souls collided. Mukesh said something stupid, Sanjana laughed anyway. The rest is history.',
-    emoji: '💫',
+    description: 'Two souls collided. Mukesh said something stupid, Sanjana laughed anyway.',
   },
   {
+    number: '/02',
     date: 'First Week',
     title: 'The Realization',
-    description: 'Wait... we actually like each other? This wasn\'t in the plan but we\'re not complaining.',
-    emoji: '🤯',
+    description: "Wait... we actually like each other? This wasn't in the plan but we're not complaining.",
   },
   {
+    number: '/03',
     date: 'First Month',
     title: 'The "Official" Talk',
-    description: 'After 47 hints from Sanjana, Mukesh finally got the message. We made it official!',
-    emoji: '💕',
+    description: 'After 47 hints from Sanjana, Mukesh finally got the message.',
   },
   {
+    number: '/04',
     date: 'Ongoing',
     title: 'Building Memories',
-    description: 'Every day is a new adventure. Some days we fight, some days we can\'t stop laughing. Perfect balance.',
-    emoji: '🎢',
+    description: "Every day is a new adventure. Some days we fight, some days we can't stop laughing.",
   },
   {
+    number: '/05',
     date: 'Forever',
     title: 'The Promise',
     description: 'To annoy each other, support each other, and love each other. Till the WiFi do us part.',
-    emoji: '💍',
   },
 ];
 
 const TimelineSection = () => {
   return (
-    <section id="timeline" className="relative py-32 px-6 md:px-12">
-      {/* Section label */}
-      <motion.div
-        className="mb-16"
-        initial={{ opacity: 0, x: -50 }}
+    <section id="timeline" className="relative py-24 md:py-40 px-6 md:px-12">
+      {/* Section header */}
+      <motion.span
+        className="font-body text-[10px] tracking-[0.4em] text-muted-foreground uppercase block mb-12"
+        initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <span className="font-body text-xs tracking-[0.3em] text-muted-foreground uppercase">
-          (Our Journey)
-        </span>
-      </motion.div>
+        (Timeline)
+      </motion.span>
 
-      {/* Stacked titles */}
+      {/* Stacked title */}
       <div className="relative mb-8">
-        {[...Array(5)].map((_, i) => (
+        {[0, 1, 2].map((i) => (
           <motion.h2
-            key={i}
-            className={`font-display text-[10vw] md:text-[7vw] font-bold leading-none ${
-              i === 4 ? 'text-foreground' : 'text-outline opacity-15'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: i === 4 ? 1 : 0.15, y: 0 }}
+            key={`ghost-${i}`}
+            className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-outline opacity-[0.06]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 0.06, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.6 }}
+            transition={{ delay: i * 0.03, duration: 0.8 }}
             style={{
-              position: i === 4 ? 'relative' : 'absolute',
-              top: i === 4 ? 'auto' : `${i * 5}px`,
+              position: 'absolute',
+              top: `${i * 4}px`,
               left: 0,
             }}
           >
-            LOVE
+            OUR
           </motion.h2>
         ))}
+        <motion.h2
+          className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-foreground relative"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.8 }}
+        >
+          OUR
+        </motion.h2>
       </div>
 
       <div className="relative mb-20">
-        {[...Array(5)].map((_, i) => (
+        {[0, 1, 2].map((i) => (
           <motion.h2
-            key={i}
-            className={`font-display text-[10vw] md:text-[7vw] font-bold leading-none ${
-              i === 4 ? 'text-accent' : 'text-outline-thin opacity-10'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: i === 4 ? 1 : 0.1, y: 0 }}
+            key={`ghost2-${i}`}
+            className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-outline-thin opacity-[0.04]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 0.04, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 + i * 0.05, duration: 0.6 }}
+            transition={{ delay: 0.15 + i * 0.03, duration: 0.8 }}
             style={{
-              position: i === 4 ? 'relative' : 'absolute',
-              top: i === 4 ? 'auto' : `${i * 5}px`,
+              position: 'absolute',
+              top: `${i * 4}px`,
               left: 0,
             }}
           >
-            TIMELINE
+            JOURNEY
           </motion.h2>
         ))}
+        <motion.h2
+          className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-accent relative"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+        >
+          JOURNEY
+        </motion.h2>
       </div>
 
-      {/* Timeline */}
-      <div className="relative max-w-4xl mx-auto">
-        {/* Vertical line */}
-        <motion.div
-          className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-border"
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: 'easeOut' }}
-          style={{ transformOrigin: 'top' }}
-        />
-
+      {/* Timeline items - horizontal layout like Sonance METHOD section */}
+      <div className="max-w-6xl">
         {timelineEvents.map((event, index) => (
           <motion.div
-            key={index}
-            className={`relative flex items-start gap-8 mb-16 ${
-              index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-            }`}
-            initial={{ opacity: 0, y: 50 }}
+            key={event.number}
+            className="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 border-t border-border py-10 md:py-16"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.15, duration: 0.8 }}
+            transition={{ delay: index * 0.1, duration: 0.8 }}
           >
-            {/* Timeline dot */}
-            <motion.div
-              className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 + 0.3, duration: 0.4, type: 'spring' }}
-            />
-
-            {/* Content */}
-            <div className={`ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
-              <motion.div
-                className="p-6 bg-card rounded-lg border border-border hover:border-accent/30 transition-colors"
-                whileHover={{ scale: 1.02, y: -5 }}
-              >
-                <span className="text-4xl mb-4 block">{event.emoji}</span>
-                <span className="font-body text-xs tracking-widest text-accent uppercase">
-                  {event.date}
-                </span>
-                <h3 className="font-display text-2xl font-bold text-foreground mt-2">
-                  {event.title}
-                </h3>
-                <p className="font-body text-muted-foreground mt-3 leading-relaxed">
-                  {event.description}
-                </p>
-              </motion.div>
+            {/* Number */}
+            <div className="md:col-span-1">
+              <span className="font-body text-xs tracking-[0.2em] text-muted-foreground">
+                {event.number}
+              </span>
             </div>
 
-            {/* Spacer for alternating layout */}
-            <div className="hidden md:block md:w-1/2" />
+            {/* Date */}
+            <div className="md:col-span-2">
+              <span className="font-body text-xs tracking-[0.2em] text-accent uppercase">
+                {event.date}
+              </span>
+            </div>
+
+            {/* Title */}
+            <div className="md:col-span-4">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground group-hover:text-accent transition-colors duration-500">
+                {event.title}
+              </h3>
+            </div>
+
+            {/* Description */}
+            <div className="md:col-span-5">
+              <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed">
+                {event.description}
+              </p>
+            </div>
           </motion.div>
         ))}
+        
+        {/* Bottom border */}
+        <div className="border-t border-border" />
       </div>
     </section>
   );

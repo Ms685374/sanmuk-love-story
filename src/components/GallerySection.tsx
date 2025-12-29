@@ -10,20 +10,13 @@ import coupleCooking from '@/assets/couple-cooking.jpg';
 import heroCouple from '@/assets/hero-couple-1.jpg';
 
 const galleryItems = [
-  { id: 'summer', title: 'Summer Days', description: 'When we discovered we both hate the heat', image: heroCouple },
-  { id: 'veil', title: 'First Date', description: 'Mukesh was so nervous he forgot his wallet', image: coupleBeach },
-  { id: 'flicker', title: 'Movie Nights', description: 'Fighting over the remote since day one', image: coupleLaugh },
-  { id: 'bloom', title: 'Adventures', description: 'Getting lost but never admitting it', image: coupleEmbrace },
-  { id: 'haze', title: 'Lazy Sundays', description: 'Professional couch potatoes at work', image: coupleStars },
-];
-
-const row2Items = [
-  { id: 1, image: coupleDance },
-  { id: 2, image: coupleCooking },
-  { id: 3, image: heroCouple },
-  { id: 4, image: coupleBeach },
-  { id: 5, image: coupleLaugh },
-  { id: 6, image: coupleStars },
+  { id: 'summer', title: 'Summer Days', image: heroCouple },
+  { id: 'first', title: 'First Date', image: coupleBeach },
+  { id: 'movie', title: 'Movie Nights', image: coupleLaugh },
+  { id: 'adventure', title: 'Adventures', image: coupleEmbrace },
+  { id: 'lazy', title: 'Lazy Sundays', image: coupleStars },
+  { id: 'dance', title: 'Dance Floor', image: coupleDance },
+  { id: 'cooking', title: 'Kitchen Chaos', image: coupleCooking },
 ];
 
 const GallerySection = () => {
@@ -33,143 +26,152 @@ const GallerySection = () => {
     offset: ['start end', 'end start'],
   });
 
-  const x1 = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
-  const x2 = useTransform(scrollYProgress, [0, 1], ['-30%', '0%']);
+  const x1 = useTransform(scrollYProgress, [0, 1], ['5%', '-40%']);
+  const x2 = useTransform(scrollYProgress, [0, 1], ['-20%', '10%']);
 
   return (
-    <section id="gallery" ref={containerRef} className="relative py-32 overflow-hidden">
-      {/* Section label */}
-      <motion.div
-        className="px-6 md:px-12 mb-16"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="font-body text-xs tracking-[0.3em] text-muted-foreground uppercase">
+    <section id="gallery" ref={containerRef} className="relative py-24 md:py-40 overflow-hidden">
+      {/* Section header */}
+      <div className="px-6 md:px-12 mb-6">
+        <motion.span
+          className="font-body text-[10px] tracking-[0.4em] text-muted-foreground uppercase block mb-8"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           (Archive)
-        </span>
-      </motion.div>
+        </motion.span>
 
-      {/* Stacked titles */}
-      <div className="px-6 md:px-12 relative mb-8">
-        {[...Array(5)].map((_, i) => (
+        {/* Stacked title */}
+        <div className="relative mb-4">
+          {[0, 1, 2].map((i) => (
+            <motion.h2
+              key={`ghost-${i}`}
+              className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-outline opacity-[0.06]"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 0.06, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.03, duration: 0.8 }}
+              style={{
+                position: 'absolute',
+                top: `${i * 4}px`,
+                left: 0,
+              }}
+            >
+              VISUAL
+            </motion.h2>
+          ))}
           <motion.h2
-            key={i}
-            className={`font-display text-[10vw] md:text-[7vw] font-bold leading-none ${
-              i === 4 ? 'text-foreground' : 'text-outline opacity-15'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: i === 4 ? 1 : 0.15, y: 0 }}
+            className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-foreground relative"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.6 }}
-            style={{
-              position: i === 4 ? 'relative' : 'absolute',
-              top: i === 4 ? 'auto' : `${i * 5}px`,
-              left: 24,
-            }}
+            transition={{ delay: 0.1, duration: 0.8 }}
           >
             VISUAL
           </motion.h2>
-        ))}
-      </div>
+        </div>
 
-      <div className="px-6 md:px-12 relative mb-20">
-        {[...Array(5)].map((_, i) => (
+        <div className="relative">
+          {[0, 1, 2].map((i) => (
+            <motion.h2
+              key={`ghost2-${i}`}
+              className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-outline-thin opacity-[0.04]"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 0.04, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 + i * 0.03, duration: 0.8 }}
+              style={{
+                position: 'absolute',
+                top: `${i * 4}px`,
+                left: 0,
+              }}
+            >
+              ARCHIVE
+            </motion.h2>
+          ))}
           <motion.h2
-            key={i}
-            className={`font-display text-[10vw] md:text-[7vw] font-bold leading-none ${
-              i === 4 ? 'text-accent' : 'text-outline-thin opacity-10'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: i === 4 ? 1 : 0.1, y: 0 }}
+            className="font-display text-[14vw] md:text-[10vw] font-bold leading-[0.9] text-accent relative"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 + i * 0.05, duration: 0.6 }}
-            style={{
-              position: i === 4 ? 'relative' : 'absolute',
-              top: i === 4 ? 'auto' : `${i * 5}px`,
-              left: 24,
-            }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
             ARCHIVE
           </motion.h2>
-        ))}
+        </div>
       </div>
 
       {/* Description */}
       <motion.p
-        className="px-6 md:px-12 font-display text-lg md:text-xl italic text-muted-foreground max-w-2xl mb-16"
+        className="px-6 md:px-12 font-display text-lg md:text-2xl italic text-muted-foreground max-w-xl mb-20"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.4, duration: 0.8 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
       >
-        A curated collection of our most chaotic moments, blending stupid adventures with pure love.
+        A curated collection of our most chaotic and beautiful moments.
       </motion.p>
 
       {/* Gallery Row 1 */}
-      <motion.div className="flex gap-6 mb-6" style={{ x: x1 }}>
-        {galleryItems.map((item, index) => (
+      <motion.div className="flex gap-4 md:gap-6 mb-4 md:mb-6" style={{ x: x1 }}>
+        {galleryItems.slice(0, 4).map((item, index) => (
           <motion.div
             key={item.id}
-            className="relative flex-shrink-0 w-[280px] md:w-[350px] h-[350px] md:h-[450px] bg-secondary rounded-lg overflow-hidden group cursor-pointer"
-            initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.6, type: 'spring' }}
-            whileHover={{ scale: 1.03, rotate: 1 }}
+            className="relative flex-shrink-0 w-[260px] md:w-[380px] aspect-[4/5] overflow-hidden group"
+            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+            whileInView={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ 
+              delay: index * 0.12, 
+              duration: 1.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
           >
-            {/* Image */}
             <motion.img
               src={item.image}
               alt={item.title}
-              className="w-full h-full object-cover"
-              initial={{ scale: 1.3 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5 }}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-
-            {/* Overlay with info */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6"
-            >
-              <h3 className="font-display text-xl font-bold text-foreground">{item.title}</h3>
-              <p className="font-body text-sm text-muted-foreground mt-1">{item.description}</p>
-            </motion.div>
-
-            {/* Border animation */}
-            <motion.div
-              className="absolute inset-0 border-2 border-transparent group-hover:border-accent/50 rounded-lg transition-all duration-500"
-            />
+            
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+              <span className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                {item.title}
+              </span>
+            </div>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Gallery Row 2 - Different photos */}
-      <motion.div className="flex gap-6" style={{ x: x2 }}>
-        {row2Items.map((item, index) => (
+      {/* Gallery Row 2 - opposite direction */}
+      <motion.div className="flex gap-4 md:gap-6" style={{ x: x2 }}>
+        {galleryItems.slice(3).map((item, index) => (
           <motion.div
             key={item.id}
-            className="relative flex-shrink-0 w-[200px] md:w-[280px] h-[280px] md:h-[350px] bg-card rounded-lg overflow-hidden group"
-            initial={{ opacity: 0, scale: 0.9, rotate: 3 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.08, duration: 0.6, type: 'spring' }}
-            whileHover={{ scale: 1.05, rotate: Math.random() * 4 - 2 }}
+            className="relative flex-shrink-0 w-[220px] md:w-[320px] aspect-square overflow-hidden group"
+            initial={{ opacity: 0, clipPath: 'inset(0 0 0 100%)' }}
+            whileInView={{ opacity: 1, clipPath: 'inset(0 0 0 0%)' }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ 
+              delay: index * 0.12, 
+              duration: 1.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
           >
             <motion.img
               src={item.image}
-              alt="Memory"
-              className="w-full h-full object-cover"
-              initial={{ scale: 1.2 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2 }}
+              alt={item.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <motion.div
-              className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"
-            />
+            
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+              <span className="font-display text-xl md:text-2xl font-bold text-foreground">
+                {item.title}
+              </span>
+            </div>
           </motion.div>
         ))}
       </motion.div>
