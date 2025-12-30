@@ -17,28 +17,27 @@ const Index = () => {
       className="min-h-screen bg-background text-foreground overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.8 }}
     >
       {/* Film grain overlay */}
       <div className="film-grain" />
       
-      {/* Smooth scroll container */}
       <Navbar />
       <Hero />
       
       <MarqueeSection 
-        words={['ZURO', '❤️', 'ZUBI', '💕', 'PICHI', '✨', 'SANMUK', '💖']} 
+        words={['SANMUK', 'FOREVER', 'SANMUK', 'FOREVER']} 
         direction="left"
-        speed={30}
+        speed={35}
       />
       
       <StorySection />
       <PhotoSlider />
       
       <MarqueeSection 
-        words={['STUPID', 'OLD', 'MAN', '👴', 'BUT', 'HER', 'STUPID', '❤️']} 
+        words={['LOVE', 'ALWAYS', 'TOGETHER', 'FOREVER']} 
         direction="right"
-        speed={35}
+        speed={40}
       />
       
       <ServicesSection />
