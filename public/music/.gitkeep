@@ -1,0 +1,4 @@
+# Add your music files here
+# First song should be named: running-up-that-hill.mp3
+# Additional songs: song2.mp3, song3.mp3, etc.
+# Edit the songs list in src/components/MusicPlayer.tsx
