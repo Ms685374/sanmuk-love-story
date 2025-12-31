@@ -10,7 +10,8 @@ const ForeverSection = () => {
   });
 
   useEffect(() => {
-    const startDate = new Date('2024-12-29T00:00:00');
+    // First met: 22 November 2024 at 10:00 AM
+    const startDate = new Date('2024-11-22T10:00:00');
 
     const updateTimer = () => {
       const now = new Date();

@@ -9,7 +9,10 @@ import GallerySection from '@/components/GallerySection';
 import TimelineSection from '@/components/TimelineSection';
 import QuotesSection from '@/components/QuotesSection';
 import ForeverSection from '@/components/ForeverSection';
+import MoviesSection from '@/components/MoviesSection';
 import Footer from '@/components/Footer';
+import MusicPlayer from '@/components/MusicPlayer';
+import HappyNewYear from '@/components/HappyNewYear';
 
 const Index = () => {
   return (
@@ -21,6 +24,10 @@ const Index = () => {
     >
       {/* Film grain overlay */}
       <div className="film-grain" />
+      
+      {/* Floating elements */}
+      <HappyNewYear />
+      <MusicPlayer />
       
       <Navbar />
       <Hero />
@@ -43,6 +50,7 @@ const Index = () => {
       <ServicesSection />
       <GallerySection />
       <TimelineSection />
+      <MoviesSection />
       <QuotesSection />
       <ForeverSection />
       <Footer />
