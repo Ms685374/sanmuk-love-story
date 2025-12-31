@@ -1,12 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-import coupleBeach from '@/assets/couple-beach.jpg';
-import coupleEmbrace from '@/assets/couple-embrace.jpg';
-import coupleLaugh from '@/assets/couple-laugh.jpg';
-import coupleStars from '@/assets/couple-stars.jpg';
-import heroCouple from '@/assets/hero-couple-1.jpg';
-
 const photos = [
   { id: 1, image: heroCouple, caption: 'Where it all began' },
   { id: 2, image: coupleBeach, caption: 'Our favorite escape' },
