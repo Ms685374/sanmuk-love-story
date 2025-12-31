@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Music, Volume2, VolumeX } from 'lucide-react';
 
 interface Song {
@@ -12,22 +12,77 @@ const MusicPlayer = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [currentVolume, setCurrentVolume] = useState(0.7);
+  const [isScrolling, setIsScrolling] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const targetVolumeRef = useRef(0.7);
 
   // Add your songs here - just add more objects with name and src
+  // First song: Running Up That Hill by Kate Bush
   const songs: Song[] = [
-    { name: 'Song 1', src: '/music/song1.mp3' },
+    { name: 'Running Up That Hill', src: '/music/running-up-that-hill.mp3' },
     { name: 'Song 2', src: '/music/song2.mp3' },
     { name: 'Song 3', src: '/music/song3.mp3' },
   ];
 
   const currentSong = songs[currentSongIndex];
 
+  // Smooth volume transition
+  const smoothVolumeChange = useCallback((targetVolume: number) => {
+    if (!audioRef.current) return;
+    
+    targetVolumeRef.current = targetVolume;
+    const currentVol = audioRef.current.volume;
+    const diff = targetVolume - currentVol;
+    const steps = 20;
+    const stepSize = diff / steps;
+    let step = 0;
+
+    const interval = setInterval(() => {
+      if (!audioRef.current || step >= steps) {
+        clearInterval(interval);
+        return;
+      }
+      audioRef.current.volume = Math.max(0, Math.min(1, currentVol + stepSize * step));
+      setCurrentVolume(audioRef.current.volume);
+      step++;
+    }, 15);
+  }, []);
+
+  // Scroll detection for volume control
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!isPlaying) return;
+      
+      setIsScrolling(true);
+      smoothVolumeChange(0.7); // Full volume when scrolling
+      
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+        smoothVolumeChange(0.15); // Lower volume when stopped
+      }, 150);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [isPlaying, smoothVolumeChange]);
+
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
+        audioRef.current.volume = 0.15; // Start quiet
+        setCurrentVolume(0.15);
         audioRef.current.play().catch(() => {
-          // Autoplay blocked, user needs to interact first
           setIsPlaying(false);
         });
       } else {
