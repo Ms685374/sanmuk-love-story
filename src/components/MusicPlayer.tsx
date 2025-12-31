@@ -21,9 +21,9 @@ const MusicPlayer = () => {
   // Add your songs here - just add more objects with name and src
   // First song: Running Up That Hill by Kate Bush
   const songs: Song[] = [
-    { name: 'Running Up That Hill', src: '/music/running-up-that-hill.mp3' },
-    { name: 'Song 2', src: '/music/song2.mp3' },
-    { name: 'Song 3', src: '/music/song3.mp3' },
+    { name: 'Running Up That Hill', src: 'njfn.mp3' },
+    { name: 'Nee Paata Madhuram', src: '3 (Telugu) - Nee Paata Madhuram Video  Dhanush, Shruti  Anirudh.mp3' },
+    { name: 'love me like you do', src: 'ellie goulding - love me like you do (slowed  reverb) ✧.mp3' },
   ];
 
   const currentSong = songs[currentSongIndex];
