@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 
 const Hero = () => {
@@ -8,9 +8,12 @@ const Hero = () => {
     offset: ['start start', 'end start']
   });
   
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 150]);
+  // Butter smooth spring config
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  
+  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0]), springConfig);
+  const scale = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0.9]), springConfig);
+  const y = useSpring(useTransform(scrollYProgress, [0, 0.5], [0, 150]), springConfig);
 
   const title = "SANMUK";
 
@@ -26,7 +29,7 @@ const Hero = () => {
             'radial-gradient(ellipse at 30% 50%, hsl(350 80% 60% / 0.05) 0%, transparent 50%)',
           ]
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Main content */}
@@ -43,9 +46,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 120 }}
               animate={{ opacity: 0.06, y: 0 }}
               transition={{
-                duration: 1.4,
-                delay: i * 0.04,
-                ease: [0.25, 0.46, 0.45, 0.94]
+                duration: 1.8,
+                delay: i * 0.05,
+                ease: [0.16, 1, 0.3, 1]
               }}
               style={{
                 position: 'absolute',
@@ -66,9 +69,9 @@ const Hero = () => {
                 initial={{ y: 200, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{
-                  duration: 1.2,
-                  delay: 0.3 + i * 0.06,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 1.6,
+                  delay: 0.3 + i * 0.08,
+                  ease: [0.16, 1, 0.3, 1]
                 }}
                 className="inline-block"
               >
@@ -87,9 +90,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 0.05, y: 0 }}
               transition={{
-                duration: 1.2,
-                delay: 0.9 + i * 0.03,
-                ease: [0.25, 0.46, 0.45, 0.94]
+                duration: 1.5,
+                delay: 1 + i * 0.04,
+                ease: [0.16, 1, 0.3, 1]
               }}
               style={{
                 position: 'absolute',
@@ -106,9 +109,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: 1.2,
-              delay: 1,
-              ease: [0.25, 0.46, 0.45, 0.94]
+              duration: 1.5,
+              delay: 1.1,
+              ease: [0.16, 1, 0.3, 1]
             }}
           >
             Forever Yours
@@ -120,17 +123,17 @@ const Hero = () => {
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 1.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="font-body text-[10px] md:text-xs tracking-[0.4em] text-muted-foreground uppercase">
-            Est. December 2024
+            Est. November 2024
           </span>
           
           <motion.div
             className="w-[1px] h-16 bg-gradient-to-b from-muted-foreground/50 to-transparent"
             initial={{ scaleY: 0 }}
             animate={{ scaleY: 1 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
+            transition={{ delay: 2.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             style={{ transformOrigin: 'top' }}
           />
         </motion.div>
@@ -141,7 +144,7 @@ const Hero = () => {
         className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 hidden md:block"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 1 }}
+        transition={{ delay: 1.5, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       >
         <span className="font-body text-[10px] tracking-[0.3em] text-muted-foreground uppercase writing-vertical">
           Mukesh & Sanjana
@@ -152,7 +155,7 @@ const Hero = () => {
         className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 hidden md:block"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 1 }}
+        transition={{ delay: 1.5, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       >
         <span className="font-body text-[10px] tracking-[0.3em] text-muted-foreground uppercase writing-vertical">
           One Year Together

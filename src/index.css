@@ -50,6 +50,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 2rem;
   }
 
   body {
@@ -58,6 +59,13 @@
     overflow-x: hidden;
     font-weight: 400;
     letter-spacing: 0.01em;
+  }
+
+  /* Ultra smooth scrolling */
+  @supports (scroll-behavior: smooth) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -102,10 +110,10 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
-  /* Smooth image reveal */
+  /* Smooth image reveal - butter smooth */
   .image-reveal {
     clip-path: inset(100% 0 0 0);
-    animation: reveal-up 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: reveal-up 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   @keyframes reveal-up {
@@ -117,7 +125,7 @@
   /* Horizontal reveal */
   .image-reveal-horizontal {
     clip-path: inset(0 100% 0 0);
-    animation: reveal-right 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: reveal-right 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   @keyframes reveal-right {
@@ -126,11 +134,11 @@
     }
   }
 
-  /* Fade animations */
+  /* Fade animations - butter smooth */
   .fade-up {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .fade-up.visible {
@@ -145,13 +153,13 @@
   .stagger-4 { transition-delay: 0.4s; }
   .stagger-5 { transition-delay: 0.5s; }
 
-  /* Subtle hover lift */
+  /* Subtle hover lift - butter smooth */
   .hover-lift {
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .hover-lift:hover {
-    transform: translateY(-8px);
+    transform: translateY(-12px);
   }
 
   /* Link underline animation */
