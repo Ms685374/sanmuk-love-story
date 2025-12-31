@@ -1,22 +1,17 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-import coupleBeach from '@/assets/couple-beach.jpg';
-import coupleEmbrace from '@/assets/couple-embrace.jpg';
-import coupleLaugh from '@/assets/couple-laugh.jpg';
-import coupleStars from '@/assets/couple-stars.jpg';
-import coupleDance from '@/assets/couple-dance.jpg';
-import coupleCooking from '@/assets/couple-cooking.jpg';
-import heroCouple from '@/assets/hero-couple-1.jpg';
-
+// Images are loaded from public/photos folder
+// To change: replace images in public/photos/ with your own (keep same filenames)
+// Or change the filenames below to match your new images
 const galleryItems = [
-  { id: 'summer', title: 'Summer Days', image: heroCouple },
-  { id: 'first', title: 'First Date', image: coupleBeach },
-  { id: 'movie', title: 'Movie Nights', image: coupleLaugh },
-  { id: 'adventure', title: 'Adventures', image: coupleEmbrace },
-  { id: 'lazy', title: 'Lazy Sundays', image: coupleStars },
-  { id: 'dance', title: 'Dance Floor', image: coupleDance },
-  { id: 'cooking', title: 'Kitchen Chaos', image: coupleCooking },
+  { id: 'summer', title: 'Summer Days', image: '/photos/photo1.jpg' },
+  { id: 'first', title: 'First Date', image: '/photos/photo2.jpg' },
+  { id: 'movie', title: 'Movie Nights', image: '/photos/photo3.jpg' },
+  { id: 'adventure', title: 'Adventures', image: '/photos/photo4.jpg' },
+  { id: 'lazy', title: 'Lazy Sundays', image: '/photos/photo5.jpg' },
+  { id: 'dance', title: 'Dance Floor', image: '/photos/photo6.jpg' },
+  { id: 'cooking', title: 'Kitchen Chaos', image: '/photos/photo7.jpg' },
 ];
 
 const GallerySection = () => {
