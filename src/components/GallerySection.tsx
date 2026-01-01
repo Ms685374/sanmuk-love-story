@@ -5,13 +5,12 @@ import { useRef } from 'react';
 // To change: replace images in public/photos/ with your own (keep same filenames)
 // Or change the filenames below to match your new images
 const galleryItems = [
-  { id: 'summer', title: 'Summer Days', image: '/photos/photo1.jpg' },
-  { id: 'first', title: 'First Date', image: '/photos/photo2.jpg' },
-  { id: 'movie', title: 'Movie Nights', image: '/photos/photo3.jpg' },
-  { id: 'adventure', title: 'Adventures', image: '/photos/photo4.jpg' },
-  { id: 'lazy', title: 'Lazy Sundays', image: '/photos/photo5.jpg' },
-  { id: 'dance', title: 'Dance Floor', image: '/photos/photo6.jpg' },
-  { id: 'cooking', title: 'Kitchen Chaos', image: '/photos/photo7.jpg' },
+  { id: 'beach', title: 'Beach', image: '/photos/couple-beach.jpg' },
+  { id: 'cooking', title: 'Cooking', image: '/photos/couple-cooking.jpg' },
+  { id: 'dance', title: 'Dance', image: '/photos/couple-dance.jpg' },
+  { id: 'embrace', title: 'Embrace', image: '/photos/couple-embrance.jpg' },
+  { id: 'laugh', title: 'Laugh', image: '/photos/couple-laugh.jpg' },
+  { id: 'stars', title: 'Stars', image: '/photos/couple-stars.jpg' },
 ];
 
 const GallerySection = () => {
