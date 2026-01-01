@@ -4,7 +4,7 @@ import { Play, Pause, SkipBack, SkipForward, Music, Volume2, VolumeX } from 'luc
 
 interface Song {
   name: string;
-  src: string;
+  file: string; // file inside public/music/
 }
 
 const MusicPlayer = () => {
@@ -14,19 +14,20 @@ const MusicPlayer = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(0.7);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const targetVolumeRef = useRef(0.7);
 
-  // Add your songs here - just add more objects with name and src
-  // First song: Running Up That Hill by Kate Bush
+  // Add your songs here (files must exist in public/music/)
   const songs: Song[] = [
-    { name: 'Running Up That Hill', src: 'njfn.mp3' },
-    { name: 'Nee Paata Madhuram', src: '3 (Telugu) - Nee Paata Madhuram Video  Dhanush, Shruti  Anirudh.mp3' },
-    { name: 'love me like you do', src: 'ellie goulding - love me like you do (slowed  reverb) ✧.mp3' },
+    { name: 'Running Up That Hill', file: 'njfn.mp3' },
+    { name: 'Nee Paata Madhuram', file: '3 (Telugu) - Nee Paata Madhuram Video  Dhanush, Shruti  Anirudh.mp3' },
+    { name: 'Love Me Like You Do', file: 'ellie goulding - love me like you do (slowed  reverb) ✧.mp3' },
   ];
 
   const currentSong = songs[currentSongIndex];
+  const currentSongSrc = `/music/${encodeURIComponent(currentSong.file)}`;
 
   // Smooth volume transition
   const smoothVolumeChange = useCallback((targetVolume: number) => {
@@ -78,18 +79,24 @@ const MusicPlayer = () => {
   }, [isPlaying, smoothVolumeChange]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.volume = 0.15; // Start quiet
-        setCurrentVolume(0.15);
-        audioRef.current.play().catch(() => {
+    if (!audioRef.current) return;
+
+    setLoadError(null);
+
+    if (isPlaying) {
+      audioRef.current.volume = 0.15; // Start quiet
+      setCurrentVolume(0.15);
+      audioRef.current
+        .play()
+        .catch(() => {
+          // Autoplay is often blocked until a user taps play.
+          setLoadError('Tap play to start music (browser blocked autoplay).');
           setIsPlaying(false);
         });
-      } else {
-        audioRef.current.pause();
-      }
+    } else {
+      audioRef.current.pause();
     }
-  }, [isPlaying, currentSongIndex]);
+  }, [isPlaying, currentSongIndex, currentSongSrc]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -116,8 +123,13 @@ const MusicPlayer = () => {
     <>
       <audio
         ref={audioRef}
-        src={currentSong.src}
+        src={currentSongSrc}
+        preload="auto"
         onEnded={handleSongEnd}
+        onError={() => {
+          setLoadError(`Could not load: ${currentSong.file}`);
+          setIsPlaying(false);
+        }}
         loop={songs.length === 1}
       />
 
@@ -142,9 +154,16 @@ const MusicPlayer = () => {
                 exit={{ opacity: 0 }}
               >
                 {/* Song name */}
-                <span className="font-body text-xs text-muted-foreground min-w-[60px] truncate">
-                  {currentSong.name}
-                </span>
+                <div className="min-w-[120px]">
+                  <span className="font-body text-xs text-muted-foreground block truncate">
+                    {currentSong.name}
+                  </span>
+                  {loadError && (
+                    <span className="font-body text-[10px] text-destructive block truncate">
+                      {loadError}
+                    </span>
+                  )}
+                </div>
 
                 {/* Controls */}
                 <div className="flex items-center gap-1">
