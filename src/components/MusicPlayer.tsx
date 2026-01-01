@@ -78,10 +78,15 @@ const MusicPlayer = () => {
     };
   }, [isPlaying, smoothVolumeChange]);
 
+  // Reload audio when song changes
   useEffect(() => {
     if (!audioRef.current) return;
-
     setLoadError(null);
+    audioRef.current.load();
+  }, [currentSongSrc]);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
 
     if (isPlaying) {
       audioRef.current.volume = 0.15; // Start quiet
@@ -96,7 +101,7 @@ const MusicPlayer = () => {
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, currentSongIndex, currentSongSrc]);
+  }, [isPlaying, currentSongIndex]);
 
   useEffect(() => {
     if (audioRef.current) {
