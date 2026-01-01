@@ -29,6 +29,32 @@ const MusicPlayer = () => {
   const currentSong = songs[currentSongIndex];
   const currentSongSrc = `/music/${encodeURIComponent(currentSong.file)}`;
 
+  const setSongIndex = useCallback(
+    (index: number, autoplay: boolean) => {
+      const song = songs[index];
+      const src = `/music/${encodeURIComponent(song.file)}`;
+
+      setCurrentSongIndex(index);
+
+      // If user clicked next/prev while playing, trigger play in the SAME gesture.
+      if (!audioRef.current) return;
+      setLoadError(null);
+      audioRef.current.src = src;
+      audioRef.current.load();
+
+      if (autoplay) {
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            setLoadError('Tap play to start music (browser blocked autoplay).');
+            setIsPlaying(false);
+          });
+      }
+    },
+    [songs]
+  );
+
   // Smooth volume transition
   const smoothVolumeChange = useCallback((targetVolume: number) => {
     if (!audioRef.current) return;
@@ -113,15 +139,18 @@ const MusicPlayer = () => {
   const toggleMute = () => setIsMuted(!isMuted);
 
   const nextSong = () => {
-    setCurrentSongIndex((prev) => (prev + 1) % songs.length);
+    const nextIndex = (currentSongIndex + 1) % songs.length;
+    setSongIndex(nextIndex, isPlaying);
   };
 
   const prevSong = () => {
-    setCurrentSongIndex((prev) => (prev - 1 + songs.length) % songs.length);
+    const prevIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    setSongIndex(prevIndex, isPlaying);
   };
 
   const handleSongEnd = () => {
-    nextSong();
+    const nextIndex = (currentSongIndex + 1) % songs.length;
+    setSongIndex(nextIndex, true);
   };
 
   return (
