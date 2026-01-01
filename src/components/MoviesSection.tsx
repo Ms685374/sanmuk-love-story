@@ -10,12 +10,12 @@ interface Movie {
 const MoviesSection = () => {
   // Add your movies here
   const movies: Movie[] = [
-    { title: 'Movie 1', date: 'Dec 2024', note: 'First movie together' },
-    { title: 'Movie 2', date: 'Dec 2024', note: 'We cried so much' },
-    { title: 'Movie 3', date: 'Dec 2024', note: 'Your favorite' },
-    { title: 'Movie 4', date: 'Dec 2024', note: 'Watched twice' },
-    { title: 'Movie 5', date: 'Jan 2025', note: 'Late night' },
-    { title: 'Movie 6', date: 'Jan 2025', note: 'So romantic' },
+    { title: '3', date: 'Jan 2025', note: 'First movie together' },
+    { title: 'Sita Ramam', date: 'Feb 2025', note: 'We cried so much' },
+    { title: '50 shades of grey(series)', date: 'Aug 2025', note: 'Your favorite' },
+    { title: 'Meenakshi sundareswar', date: 'Nov 2025', note: 'Watched twice' },
+    { title: '2 States', date: 'Jun 2025', note: 'Our Journey' },
+    { title: 'Titanic', date: 'May 2025', note: 'So romantic' },
   ];
 
   return (
